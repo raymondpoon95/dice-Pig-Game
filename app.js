@@ -4,7 +4,7 @@
 *********************************************
 */
 
-let scores, roundScore, activePlayer;
+let scores, roundScore, activePlayer, gamePlaying;
 
 initalise();
 
@@ -15,12 +15,15 @@ initalise();
 */
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
+    // generate random number from 1 to 6
     let dice = Math.floor(Math.random() * 6) + 1;
 
+    // displays the result
     const diceDOM = document.querySelector('.dice');
     diceDOM.style.display = 'block';
     diceDOM.src = 'dice-' + dice + '.png';
 
+    // if a 1 is rolled, switch players otherwise keep count 
     if(dice !== 1){
         roundScore += dice;
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
@@ -41,7 +44,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 
     document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
 
-    if(scores[activePlayer] >= 10){
+    if(scores[activePlayer] >= 10){ // change this back to 100
         document.querySelector('#name-'+activePlayer).textContent = 'Winner!';
         document.querySelector('.dice').style.display = 'none';
         document.querySelector('.player-'+activePlayer+'-panel').classList.add('winner');
@@ -61,7 +64,9 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 */
 
 function nextPlayer(){
+    // if the activeplayer is 0 switch to 1 and vice versa
     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+
         roundScore = 0;
 
         document.getElementById('current-0').textContent = 0;
@@ -109,5 +114,4 @@ function initalise(){
 
     document.querySelector('.btn-roll').disabled = false;
     document.querySelector('.btn-hold').disabled = false;
-    
 }
