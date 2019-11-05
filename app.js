@@ -27,7 +27,6 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     // if two consecutive sixes are rolled, score gets set to zero and switch players 
         if(previousDiceRoll === 6 && dice === 6){
             scores[activePlayer] = 0;
-            document.querySelector('#current-' + activePlayer).textContent = '0';
             document.querySelector('#score-' + activePlayer).textContent = '0';
             nextPlayer();
         }
