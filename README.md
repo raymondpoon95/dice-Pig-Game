@@ -1,6 +1,13 @@
-# dice-Pig-Game
+## dice-Pig-Game
 
-A javascript dice game with two players, competing to get to score 100 first or an indicatee score of your choice. Different rules occur depending on what numbers you roll.
+A small javascript dice game project, with two players, competing to get to score 100 first or an indicated score of your choice. Different rules occur depending on what numbers you roll.
+
+### Rules of the game
+```
+- Rolling 2 consecutive sixes will change your overall score to 0.
+- Rolling a 1 will change your current score to 0 and switch players.
+- Rolling a double will double your score.
+```
 
 
 
