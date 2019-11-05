@@ -4,8 +4,7 @@
 *********************************************
 */
 
-let scores, roundScore, activePlayer, gamePlaying;
-
+let scores, roundScore, activePlayer, gamePlaying, previousDiceRoll;
 initalise();
 
 /*
@@ -16,6 +15,7 @@ initalise();
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
     if(gamePlaying) {
+        
         // generate random number from 1 to 6
         let dice = Math.floor(Math.random() * 6) + 1;
 
@@ -24,13 +24,21 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDOM.style.display = 'block';
         diceDOM.src = 'dice-' + dice + '.png';
 
-    // if a 1 is rolled, switch players otherwise keep count 
-        if(dice !== 1){
+    // if two consecutive sixes are rolled, score gets set to zero and switch players 
+        if(previousDiceRoll === 6 && dice === 6){
+            scores[activePlayer] = 0;
+            document.querySelector('#current-' + activePlayer).textContent = '0';
+            document.querySelector('#score-' + activePlayer).textContent = '0';
+            nextPlayer();
+        }
+        else if(dice !== 1){ // if a 1 is rolled, switch players 
             roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else {
             nextPlayer();
         }
+
+        previousDiceRoll = dice;
     }
 });
 
@@ -47,7 +55,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 
         document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
 
-        if(scores[activePlayer] >= 10){ // change this back to 100
+        if(scores[activePlayer] >= 100){ // change this back to 100
             document.querySelector('#name-'+activePlayer).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';
             document.querySelector('.player-'+activePlayer+'-panel').classList.add('winner');
