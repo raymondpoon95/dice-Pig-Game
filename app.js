@@ -8,9 +8,9 @@ let scores, roundScore, activePlayer, gamePlaying, previousDiceRoll_1, previousD
 initalise();
 
 /*
-*********************************************
+******************************************************
 *** function to roll the dice when clicking the button
-*********************************************
+******************************************************
 */
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
@@ -33,8 +33,9 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
             scores[activePlayer] = 0;
             document.querySelector('#score-' + activePlayer).textContent = '0';
             nextPlayer();
-        }
-        else if(dice_1 !== 1 && dice_2 !== 1){ // if a 1 is rolled, switch players 
+        } else if (dice_1 === dice_2){ // doubles score if you roll a double
+            roundScore = roundScore + ((dice_1 + dice_2) * 2);
+        } else if(dice_1 !== 1 && dice_2 !== 1){ // if a 1 is rolled, switch players 
             roundScore += (dice_1 + dice_2);
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else {
@@ -48,9 +49,9 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 
 /*
-*********************************************
+********************************************************************************************
 *** function that accumulates the score for the current player, unless they have rolled a 1
-*********************************************
+********************************************************************************************
 */
 
 document.querySelector('.btn-hold').addEventListener('click', function(){
@@ -84,9 +85,9 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 
 
 /*
-*********************************************
+****************************************************************
 *** switches the player over and toggles which player is active 
-*********************************************
+****************************************************************
 */
 
 function nextPlayer(){
@@ -115,9 +116,9 @@ document.querySelector('.btn-new').addEventListener('click', initalise);
 
 
 /*
-*********************************************
+**************************************************
 *** function to initialise, grabs global variables   
-*********************************************
+**************************************************
 */
 
 function initalise(){
