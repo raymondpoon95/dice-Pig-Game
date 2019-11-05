@@ -185,3 +185,7 @@ i {
     width: 160px;
     text-transform: uppercase;
 }
+
+.goal-score:focus {
+    outline: none;
+}
