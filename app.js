@@ -4,7 +4,7 @@
 *********************************************
 */
 
-let scores, roundScore, activePlayer, gamePlaying, previousDiceRoll;
+let scores, roundScore, activePlayer, gamePlaying, previousDiceRoll_1, previousDiceRoll_2;
 initalise();
 
 /*
@@ -17,27 +17,32 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     if(gamePlaying) {
         
         // generate random number from 1 to 6
-        let dice = Math.floor(Math.random() * 6) + 1;
+        let dice_1 = Math.floor(Math.random() * 6) + 1;
+        let dice_2 = Math.floor(Math.random() * 6) + 1;
 
-    // displays the result
-        const diceDOM = document.querySelector('.dice');
-        diceDOM.style.display = 'block';
-        diceDOM.src = 'dice-' + dice + '.png';
+    // displays the results for both dices
+        const dice_1_DOM = document.getElementById('dice-1');
+        const dice_2_DOM = document.getElementById('dice-2');
+        dice_1_DOM.style.display = 'block';
+        dice_2_DOM.style.display = 'block';
+        dice_1_DOM.src = 'dice-' + dice_1 + '.png';
+        dice_2_DOM.src = 'dice-' + dice_2 + '.png';
 
     // if two consecutive sixes are rolled, score gets set to zero and switch players 
-        if(previousDiceRoll === 6 && dice === 6){
+        if((previousDiceRoll_1 === 6 && dice_1 === 6) || (previousDiceRoll_2 === 6 && dice_2 === 6)){
             scores[activePlayer] = 0;
             document.querySelector('#score-' + activePlayer).textContent = '0';
             nextPlayer();
         }
-        else if(dice !== 1){ // if a 1 is rolled, switch players 
-            roundScore += dice;
+        else if(dice_1 !== 1 && dice_2 !== 1){ // if a 1 is rolled, switch players 
+            roundScore += (dice_1 + dice_2);
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else {
             nextPlayer();
         }
 
-        previousDiceRoll = dice; // variable to keep note of previous dice roll
+        previousDiceRoll_1 = dice_1; // variable to keep note of previous dice roll
+        previousDiceRoll_2 = dice_2;
     }
 });
 
@@ -65,7 +70,10 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 
         if(scores[activePlayer] >= winningScore){ 
             document.querySelector('#name-'+activePlayer).textContent = 'Winner!';
-            document.querySelector('.dice').style.display = 'none';
+
+            document.getElementById('dice-1').style.display = 'none';
+            document.getElementById('dice-2').style.display = 'none';
+
             document.querySelector('.player-'+activePlayer+'-panel').classList.add('winner');
             document.querySelector('.player-'+activePlayer+'-panel').classList.remove('active');
             gamePlaying = false;
@@ -90,9 +98,12 @@ function nextPlayer(){
 
         document.getElementById('current-0').textContent = 0;
         document.getElementById('current-1').textContent = 0;
+
         document.querySelector('.player-0-panel').classList.toggle('active');
         document.querySelector('.player-1-panel').classList.toggle('active');
-        document.querySelector('.dice').style.display = 'none';
+
+        document.getElementById('dice-1').style.display = 'none';
+        document.getElementById('dice-2').style.display = 'none';
 }
 
 
@@ -117,7 +128,8 @@ function initalise(){
     roundScore = 0;
     gamePlaying = true;
 
-    document.querySelector('.dice').style.display = 'none';
+    document.getElementById('dice-1').style.display = 'none';
+    document.getElementById('dice-2').style.display = 'none';
 
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';

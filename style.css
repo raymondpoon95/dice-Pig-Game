@@ -189,3 +189,11 @@ i {
 .goal-score:focus {
     outline: none;
 }
+
+#dice-1 {
+    top: 140px;
+}
+
+#dice-2 {
+    top: 260px;
+}
