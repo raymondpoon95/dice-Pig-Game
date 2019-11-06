@@ -24,4 +24,4 @@ Some things you need to run the project
 ## Built With
 
 * [JavaScript](https://devdocs.io/javascript/) - Language used
-* [HTML/CSS](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
+* [HTML/CSS]
