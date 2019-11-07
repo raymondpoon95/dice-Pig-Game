@@ -35,10 +35,10 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
             nextPlayer();
         } else if (dice_1 === dice_2){ // doubles score if you roll a double
             roundScore = roundScore + ((dice_1 + dice_2) * 2);
-        } else if(dice_1 !== 1 && dice_2 !== 1){ // if a 1 is rolled, switch players 
+        } else if(dice_1 !== 1 && dice_2 !== 1){ // otherwise add the scores to round score
             roundScore += (dice_1 + dice_2);
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
-        } else {
+        } else { // if a 1 is rolled, switch players 
             nextPlayer();
         }
 
